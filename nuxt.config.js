@@ -62,7 +62,7 @@ export default {
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     // baseURL: 'http://localhost:1337/api/'
-    baseURL: 'https://strapi-gypsy-store.herokuapp.com/api/'
+    baseURL: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com:${process.env.PORT}/api/`
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -75,14 +75,14 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'https://strapi-gypsy-store.herokuapp.com/graphql'
         // httpEndpoint: 'https://strapi-gypsy-store.herokuapp.com/graphql'
+        httpEndpoint: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com:${process.env.PORT}/graphql`
       }
     }
   },
   env: {
-    storeUrl: 'https://strapi-gypsy-store.herokuapp.com:1337/',
-    API_URL: 'https://strapi-gypsy-store.herokuapp.com:1337/'
+    storeUrl: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com:${process.env.PORT}/`,
+    API_URL: `https://${process.env.HEROKU_APP_NAME}.herokuapp.com:${process.env.PORT}/`
     // storeUrl: 'https://strapi-gypsy-store.herokuapp.com/',
     // API_URL: 'https://strapi-gypsy-store.herokuapp.com/'
     // snipcart_key: 'YWEyZjgwYzItOTYxNC00Mzc4LTgzODMtZGJmOTY5ODM1NzRhNjM3ODk2OTEwOTU0MDYxNzk4'
