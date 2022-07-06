@@ -1,0 +1,31 @@
+query Products($id: ID!) {
+  product(id: $id) {
+    data {
+        id
+        attributes {
+        title
+        image {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        description,
+        price,
+        custom_field {
+            title
+            required,
+            options
+        }
+        categories {
+            data {
+              attributes {
+                name
+            }
+          }
+     	 	}
+      }
+    }
+  }
+}

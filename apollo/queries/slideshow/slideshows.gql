@@ -1,0 +1,17 @@
+query Slideshows {
+  slideshows {
+    data{
+      id
+      attributes{
+        name
+        img {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+      }
+    }    
+  }
+}
