@@ -28,10 +28,6 @@ export default {
     { src: '~/plugins/splide.js', mode: 'client' }
   ],
 
-  server: {
-    port: 5000 // default: 3000
-  },
-
   // tailwindcss: {
   //   cssPath: '~/assets/css/tailwind.css'
   // },
