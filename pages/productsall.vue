@@ -22,7 +22,7 @@
                 </a>
                 <div class="pt-3">
                   <p class="font-semibold">
-                    {{ item.title }}
+                    {{ item.name }}
                   </p>
                   <h6>
                     <a :href="`/products/${item.id}`" class="text-gray-600 hover:text-primary-focus">
