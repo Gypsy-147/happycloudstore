@@ -75,8 +75,13 @@
     <!-- SECTION-CONTENT -->
     <section class="py-10">
       <div class="container max-w-screen-xl px-4 mx-auto">
-        <div class="divider mb-8">
+        <!-- <div class="divider mb-8">
           <h2 class="text-3xl font-bold text-primary">
+            New products
+          </h2>
+        </div> -->
+        <div class="title mb-8">
+          <h2 class="right-line h1-replace text-3xl font-bold text-primary">
             New products
           </h2>
         </div>
@@ -98,8 +103,13 @@
     <!-- SECTION-CONTENT -->
     <section class="py-10">
       <div class="container max-w-screen-xl px-4 mx-auto">
-        <div class="divider mb-8">
+        <!-- <div class="divider mb-8">
           <h2 class="text-3xl font-bold text-primary">
+            Hot products
+          </h2>
+        </div> -->
+        <div class="title mb-8">
+          <h2 class="left-line h1-replace text-3xl font-bold text-primary">
             Hot products
           </h2>
         </div>
@@ -271,8 +281,69 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .splide {
   padding: 0 !important;
+}
+.title {
+    overflow-x: hidden;
+    text-align: center;
+}
+h2.h1-replace {
+    @apply text-primary;
+    line-height: 1.2;
+    margin: 0 0 10px;
+    padding: 0;
+}
+h1, h2.h1-replace {
+    position: relative;
+    font-size: 40px;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+}
+h1.right-line:before, h2.h1-replace.right-line:before {
+    /* display: block; */
+    @apply hidden md:block;
+    content: "";
+    position: absolute;
+    height: 1px;
+    @apply bg-primary;
+    left: calc(100% + 120px);
+    width: 100%;
+    top: 25px;
+}
+h1.right-line:after, h2.h1-replace.right-line:after {
+    /* display: block; */
+    @apply hidden md:block;
+    content: "";
+    position: absolute;
+    width: 88px;
+    height: 27px;
+    background: url('~@/static/images/cap-click-right.svg') 50% no-repeat;
+    top: 12px;
+    right: -105px;
+}
+h1.left-line:before, h2.h1-replace.left-line:before {
+    /* display: block; */
+    @apply hidden md:block;
+    content: "";
+    position: absolute;
+    height: 1px;
+    @apply bg-primary;
+    right: calc(100% + 120px);
+    width: 100%;
+    top: 25px;
+}
+h1.left-line:after, h2.h1-replace.left-line:after {
+    /* display: block; */
+    @apply hidden md:block;
+    content: "";
+    position: absolute;
+    width: 88px;
+    height: 27px;
+    background: url('~@/static/images/cap-click-left.svg') 50% no-repeat;
+    top: 12px;
+    left: -105px;
 }
 </style>

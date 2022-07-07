@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="flex flex-col h-screen justify-between relative">
     <!--  COMPONENT: HEADER -->
-    <header>
+    <header class="fixed top-0 left-0 right-0 z-50">
       <div class="navbar bg-base-200">
         <div class="navbar-start">
           <a href="/"> <img src="/happycloudlogo.png" class="h-16" alt="logo"> </a>
@@ -85,7 +85,7 @@
         </div>
       </div>
     </header>
-    <div class="h-auto">
+    <div class="mt-20">
       <Nuxt />
     </div>
     <footer class="bg-base-200">

@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center m-6">
     <div v-if="productData !== null">
-      <div class="relative flex items-center min-h-screen p-5 overflow-hidden min-w-screen lg:p-10 rounded-box">
+      <div class="relative flex items-center p-5 overflow-hidden min-w-screen lg:p-10 rounded-box">
         <div class="relative w-full max-w-6xl p-10 mx-auto bg-white shadow-xl lg:p-20 md:text-left rounded-box">
           <div class="items-center -mx-10 md:flex">
             <div class="w-full px-10 mb-10 md:w-1/2 md:mb-0">
