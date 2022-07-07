@@ -10,7 +10,7 @@
         </div>
         <div class="grid h-full mt-6 card place-items-center">
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            <div v-for="(item) in stickybrickProducts" :key="item.id">
+            <div v-for="(item) in stickybrickData.data" :key="item.id">
               <article class="mb-4">
                 <a :href="`/products/${item.id}`" class="relative block p-1 bg-gray-100 border border-gray-200 rounded-box hover:border-primary-focus">
                   <img :src="item.attributes.image.data.attributes.url" class="w-auto mx-auto mix-blend-multiply max-h-52" alt="Product title here">
@@ -38,31 +38,20 @@
   </div>
 </template>
 <script>
-import productfiltersQuery from '../apollo/queries/product/productfilters'
-// import categoriesQuery from '../apollo/queries/category/categories'
 export default {
   name: 'StickyBrickPage',
-  apollo: {
-    products: {
-      prefetch: true,
-      query: productfiltersQuery,
-      variables () {
-        return {
-          key: 'stickybrick',
-          pagesize: 100,
-          page: 1
-        }
-      }
+  async asyncData ({ $axios }) {
+    let stickybrickData = []
+    try {
+      stickybrickData = await $axios.$get('/products?filters[categories][name][$eq]=stickybrick&populate[image][fields][0]=url&populate[categories]=%2A')
+    } catch (error) {
+      console.log(error)
     }
+    return { stickybrickData }
   },
   data () {
     return {
       products: null
-    }
-  },
-  computed: {
-    stickybrickProducts () {
-      return this.products.data
     }
   }
 }

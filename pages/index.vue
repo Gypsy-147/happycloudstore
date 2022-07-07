@@ -11,7 +11,7 @@
               @splide:arrows:mounted="onArrowsMounted"
               @splide:moved="moved"
             >
-              <SplideSlide v-for="(item) in slideshows.data" :key="item.id">
+              <SplideSlide v-for="(item) in slide.data" :key="item.id">
                 <img :src="item.attributes.img.data.attributes.url">
               </SplideSlide>
             </Splide>
@@ -60,12 +60,12 @@
         </h2>
 
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          <div v-for="(item) in newProducts.attributes.products.data" :key="item.id">
+          <div v-for="(item) in newProducts.products" :key="item.id">
             <Card
               btname="Read more.."
-              :imgurl="item.attributes.image.data.attributes.url"
-              :title="item.attributes.title"
-              :content="item.attributes.price"
+              :imgurl="item.image.url"
+              :title="item.title"
+              :content="item.price"
               :link="`/products/${item.id}`"
             />
           </div>
@@ -82,12 +82,12 @@
           Hot products
         </h2>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
-          <div v-for="(item) in hotProducts.attributes.products.data" :key="item.id">
+          <div v-for="(item) in hotProducts.products" :key="item.id">
             <Card
               btname="Read more.."
-              :imgurl="item.attributes.image.data.attributes.url"
-              :title="item.attributes.title"
-              :content="item.attributes.price"
+              :imgurl="item.image.url"
+              :title="item.title"
+              :content="item.price"
               :link="`/products/${item.id}`"
             />
           </div>
@@ -180,11 +180,33 @@
 </template>
 
 <script>
-import slideshowQuery from '../apollo/queries/slideshow/slideshows'
-import categoriesQuery from '../apollo/queries/category/categories'
-
 export default {
   name: 'IndexPage',
+  async asyncData ({ $axios }) {
+    let cat = []
+    let slide = []
+    try {
+      const qs = require('qs')
+      const query = qs.stringify(
+        {
+          populate: {
+            img: {
+              fields: ['url']
+            }
+          }
+        },
+        {
+          encodeValuesOnly: true
+        }
+      )
+      cat = await $axios.$get('/allcategories')
+      slide = await $axios.$get(`/slideshows/?${query}`)
+      // or can use https://strapi-gypsy-store.herokuapp.com/api/slideshows?populate[img][fields][0]=url
+    } catch (error) {
+      console.log(error)
+    }
+    return { allcategory: cat, slide }
+  },
   data () {
     return {
       options: {
@@ -213,20 +235,10 @@ export default {
   },
   computed: {
     newProducts () {
-      return this.categories.data.find(x => x.id === '4')
+      return this.allcategory.find(x => x.id === 4)
     },
     hotProducts () {
-      return this.categories.data.find(x => x.id === '3')
-    }
-  },
-  apollo: {
-    slideshows: {
-      prefetch: true,
-      query: slideshowQuery
-    },
-    categories: {
-      prefetch: true,
-      query: categoriesQuery
+      return this.allcategory.find(x => x.id === 3)
     }
   },
   methods: {
