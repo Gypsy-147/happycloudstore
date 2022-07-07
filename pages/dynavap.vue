@@ -3,8 +3,8 @@
     <!-- SECTION-CONTENT -->
     <section class="py-10">
       <div class="flex flex-col w-full border-opacity-50">
-        <div class="divider">
-          <h2 class="text-3xl font-bold text-primary">
+        <div class="title">
+          <h2 class="right-line h1-replace text-3xl font-bold text-primary">
             Dynavap Products
           </h2>
         </div>
@@ -53,3 +53,41 @@ export default {
   }
 }
 </script>
+<style scoped>
+.title {
+    text-align: center;
+}
+h2.h1-replace {
+    @apply text-primary;
+    line-height: 1.2;
+    margin: 0 0 10px;
+    padding: 0;
+}
+h1, h2.h1-replace {
+    position: relative;
+    font-size: 40px;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+}
+h1.right-line:before, h2.h1-replace.right-line:before {
+    display: block;
+    content: "";
+    position: absolute;
+    height: 1px;
+    @apply bg-primary;
+    left: calc(100% + 120px);
+    width: 1000px;
+    top: 25px;
+}
+h1.right-line:after, h2.h1-replace.right-line:after {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 88px;
+    height: 27px;
+    background: url('~@/static/images/cap-click-right.svg') 50% no-repeat;
+    top: 12px;
+    right: -105px;
+}
+</style>

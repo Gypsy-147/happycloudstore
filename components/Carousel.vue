@@ -3,7 +3,7 @@
   <div class="flex justify-center">
     <div class="flex items-end w-full overflow-hidden abolute rounded-box" @mouseout="ishover = !ishover" @mouseover="ishover = !ishover">
       <div
-        class="h-48 transition duration-1000 ease-in-out bg-center bg-no-repeat bg-cover w-96"
+        class="h-56 transition duration-1000 ease-in-out bg-center bg-no-repeat bg-cover max-w-full"
         :class="ishover ? 'scale-105' : 'scale-100'"
         :style="{
           backgroundImage: `url(${imgurl})`,
