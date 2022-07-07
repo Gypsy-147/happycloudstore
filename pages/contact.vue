@@ -14,7 +14,7 @@
         <i class="fa fa-phone" /> 001 2045 509
       </div> -->
       <div class="det">
-        <i class="fa fa-globe" /> www.happycloudstore.tk
+        <i class="fa fa-globe" /> www.happycloudth.com
       </div>
       <center>
         <button class="fa-brands fa-facebook-square" @click="openLink('https://www.facebook.com/happycloudthailand')" />
