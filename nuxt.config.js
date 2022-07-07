@@ -6,7 +6,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || 'Shop your next fanny pack on our shop' },
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || 'ตัวแทนจำหน่าย DynaVap ในประเทศไทย By Happy Cloud Store ผู้จัดจำหน่ายผลิตภัณฑ์ DYNAVAP จากประเทศสหรัฐอเมริกา' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
