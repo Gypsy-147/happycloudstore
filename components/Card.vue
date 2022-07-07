@@ -1,7 +1,7 @@
 <!-- Please remove this file from your project -->
 <template>
   <div class="flex justify-center">
-    <div class="flex items-end w-full overflow-hidden abolute rounded-box" @mouseout="ishover = !ishover" @mouseover="ishover = !ishover">
+    <div class="flex items-end w-full overflow-hidden abolute rounded-box bg-white" @mouseout="ishover = !ishover" @mouseover="ishover = !ishover">
       <div
         class="transition duration-1000 ease-in-out bg-center bg-no-repeat bg-cover h-96 w-96"
         :class="ishover ? 'scale-105' : 'scale-100'"
