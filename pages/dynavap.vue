@@ -55,6 +55,7 @@ export default {
 </script>
 <style scoped>
 .title {
+    overflow-x: hidden;
     text-align: center;
 }
 h2.h1-replace {
@@ -71,17 +72,19 @@ h1, h2.h1-replace {
     text-transform: uppercase;
 }
 h1.right-line:before, h2.h1-replace.right-line:before {
-    display: block;
+    /* display: block; */
+    @apply hidden md:block;
     content: "";
     position: absolute;
     height: 1px;
     @apply bg-primary;
     left: calc(100% + 120px);
-    width: 1000px;
+    width: 100%;
     top: 25px;
 }
 h1.right-line:after, h2.h1-replace.right-line:after {
-    display: block;
+    /* display: block; */
+    @apply hidden md:block;
     content: "";
     position: absolute;
     width: 88px;
