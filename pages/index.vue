@@ -1,36 +1,48 @@
 <template>
   <div>
-    <!--  MAIN SECTION  -->
-    <div class="mx-6 mt-6">
-      <div class="flex flex-col md:flex-row">
-        <div class="md:w-1/2">
-          <client-only>
-            <Splide
-              :options="options"
-              @splide:arrows:mounted="onArrowsMounted"
-              @splide:moved="moved"
-            >
-              <SplideSlide v-for="(item) in slide.data" :key="item.id">
-                <img :src="item.attributes.img.data.attributes.url">
-              </SplideSlide>
-            </Splide>
-          </client-only>
+    <section id="slide">
+      <div class="container">
+        <client-only>
+          <Splide
+            ref="main"
+            aria-labelledby="thumbnail-example-heading"
+            :options="mainOptions"
+          >
+            <SplideSlide v-for="(item) in slide.data" :key="item.id">
+              <img :src="item.attributes.img.data.attributes.url" :alt="`slide-${item.id}`">
+            </SplideSlide>
+          </Splide>
+
+          <Splide
+            ref="thumbs"
+            aria-label="The carousel with thumbnails. Selecting a thumbnail will change the main carousel"
+            :options="thumbsOptions"
+          >
+            <SplideSlide v-for="(item) in slide.data" :key="item.id">
+              <img :src="item.attributes.img.data.attributes.url" :alt="`slide-${item.id}`">
+            </SplideSlide>
+          </Splide>
+        </client-only>
+      </div>
+    </section>
+    <section id="summer-collection">
+      <div class="container">
+        <div class="sc-content">
+          <h1>ARE YOU NEW TO DYNAVAP?</h1>
+          <p class="description">
+            DynaVap makes battery-free, dry herb vaporizers that provide exceptional flavor, reduces your amount of flower used, and will last you a lifetime.
+          </p>
+          <a href="/howtouse">LEARN MORE</a>
         </div>
-        <div class="flex flex-col md:w-1/2">
-          <div class="mt-4 md:mt-0">
-            <Carousel title="Social Gallery" content="Dynaverse" imgurl="https://happycloud.sgp1.digitaloceanspaces.com/strapi/ea62e9b0399dcda59429e9e53674505a.webp?updated_at=2022-07-06T17:38:01.712Z" />
-          </div>
-          <div class="mt-4">
-            <Carousel title="How to Use & Clean" content="Your Dynavap" imgurl="https://happycloud.sgp1.digitaloceanspaces.com/strapi/2a034289701e242c4c9563c2edfc7336.webp?updated_at=2022-07-06T17:38:01.890Z" />
+        <div class="sc-media">
+          <div class="sc-media-bg">
+            <img src="https://happycloud.sgp1.digitaloceanspaces.com/strapi/a54314cc94b29ea3b1ee5ca06d1caa54.webp?updated_at=2022-07-06T23:39:06.226Z" alt="sc-image">
           </div>
         </div>
       </div>
-    </div>
-    <div class="divider" />
-    <!--  MAIN SECTION //END -->
-    <!-- SECTION-ICONMENU -->
-    <section class="pt-10">
-      <div class="container max-w-screen-xl px-4 mx-auto">
+    </section>
+    <section id="category" class="py-10">
+      <div class="container">
         <nav class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-x-3 gap-y-6">
           <a href="/dynavap" class="flex flex-col items-center justify-center">
             <button class="btn btn-lg glass bg-primary btn-circle">
@@ -67,147 +79,110 @@
             <p class="text-center text-gray-600 group-hover:text-primary-focus">  INSPIRE  </p>
           </a>
         </nav>
-      </div> <!-- container //end -->
+      </div>
     </section>
-    <!-- SECTION-ICONMENU //END -->
-    <!-- <div class="divider" /> -->
-
-    <!-- SECTION-CONTENT -->
-    <section class="py-10">
-      <div class="container max-w-screen-xl px-4 mx-auto">
-        <!-- <div class="divider mb-8">
-          <h2 class="text-3xl font-bold text-primary">
-            New products
+    <section id="newproducts">
+      <div class="container">
+        <div class="products-header">
+          <h2 class="right-line h1-replace">
+            new products
           </h2>
-        </div> -->
-        <div class="title mb-8">
-          <h2 class="right-line h1-replace text-3xl font-bold text-primary">
-            New products
-          </h2>
+          <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> -->
         </div>
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          <div v-for="(item) in newProducts.products" :key="item.id">
-            <Card
-              btname="Read more.."
-              :imgurl="item.image.url"
-              :title="item.title"
-              :content="item.price"
-              :link="`/products/${item.id}`"
-            />
+        <div v-for="(item, index) in newProducts.products" :key="index" :class="`product product-${index+1}`">
+          <a href="https://www.facebook.com/happycloudstoreth" target="_blank">
+            <!-- <a :href="`/products/${item.id}`"></a> -->
+            <figure>
+              <img :src="item.image.url" alt="product-image">
+              <figcaption>{{ item.title }}</figcaption>
+              <figcaption>{{ item.price }} ฿</figcaption>
+            </figure>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section id="hotproducts">
+      <div class="container">
+        <div class="products-header">
+          <h2 class="left-line h1-replace">
+            popular products
+          </h2>
+          <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> -->
+        </div>
+        <div v-for="(item, index) in hotProducts.products" :key="index" :class="`product product-${index+1}`">
+          <a href="https://www.facebook.com/happycloudstoreth" target="_blank">
+            <!-- <a :href="`/products/${item.id}`"></a> -->
+            <figure>
+              <img :src="item.image.url" alt="product-image">
+              <figcaption>{{ item.title }}</figcaption>
+              <figcaption>{{ item.price }} ฿</figcaption>
+            </figure>
+          </a>
+        </div>
+      </div>
+    </section>
+    <section id="collections">
+      <div class="container">
+        <div class="c-1">
+          <div class="c-1-image-holder">
+            <img src="https://happycloud.sgp1.digitaloceanspaces.com/strapi/ea62e9b0399dcda59429e9e53674505a.webp?updated_at=2022-07-06T17:38:01.712Z" alt="image">
+          </div>
+        </div>
+        <div class="c-2">
+          <h2>WHY DYNAVAP</h2>
+          <hr>
+          <div class="c-2-image-holder">
+            <img class="left" :src="slide.data[3].attributes.img.data.attributes.url" alt=""><img
+              class="right"
+              src="https://happycloud.sgp1.digitaloceanspaces.com/strapi/2a034289701e242c4c9563c2edfc7336.webp?updated_at=2022-07-06T17:38:01.890Z"
+              alt=""
+            >
+          </div>
+          <p class="button">
+            <a href="https://www.youtube.com/watch?v=EczQQarfSms&ab_channel=DrewIsSharing" target="_blank">Watch Video</a>
+          </p>
+        </div>
+      </div>
+    </section>
+    <section id="blog">
+      <div class="container">
+        <div class="blog-header">
+          <h2 class="right-line h1-replace">
+            latest from blog
+          </h2>
+          <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> -->
+        </div>
+        <!-- GETTINGS STARTED-->
+        <div v-for="(item, index) in article.data" id="blog-card" :key="index" class="blog-card">
+          <!-- item.attributes.image.data.attributes.url -->
+          <div
+            class="photo bg-cover"
+            :style="{ backgroundImage: `url(${item.attributes.image.data.attributes.url})` }"
+          />
+          <ul class="details">
+            <li class="prauthor">
+              Happy Cloud Store
+            </li>
+            <li class="prtags">
+              <ul>
+                <li>Dynavap</li>
+              </ul>
+            </li>
+          </ul>
+          <div class="description">
+            <h2>{{ item.attributes.title }}</h2>
+            <h3>{{ $dayjs(item.attributes.createdAt).format('MMM D, YYYY h:mm A') }}</h3>
+            <p v-if="item.attributes.description" ref="editor" class="truncate">
+              {{ item.attributes.description }}
+            </p>
+            <a :href="`/articles/${item.id}`">Read More</a>
           </div>
         </div>
       </div>
     </section>
-    <!--  SECTION-CONTENT  //END -->
-
-    <!-- SECTION-CONTENT -->
-    <section class="py-10">
-      <div class="container max-w-screen-xl px-4 mx-auto">
-        <!-- <div class="divider mb-8">
-          <h2 class="text-3xl font-bold text-primary">
-            Hot products
-          </h2>
-        </div> -->
-        <div class="title mb-8">
-          <h2 class="left-line h1-replace text-3xl font-bold text-primary">
-            Hot products
-          </h2>
-        </div>
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4">
-          <div v-for="(item) in hotProducts.products" :key="item.id">
-            <Card
-              btname="Read more.."
-              :imgurl="item.image.url"
-              :title="item.title"
-              :content="item.price"
-              :link="`/products/${item.id}`"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-    <div class="divider" />
-    <!--  SECTION-CONTENT  //END -->
-    <div class="flex justify-center mx-6 mb-6">
-      <div class="shadow stats bg-base-200">
-        <div class="stat place-items-center">
-          <div class="stat-figure text-primary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              aria-hidden="true"
-              role="img"
-              class="iconify iconify--fa-solid"
-              width="40"
-              height="32"
-              preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 640 512"
-            ><path fill="currentColor" d="M624 352h-16V243.9c0-12.7-5.1-24.9-14.1-33.9L494 110.1c-9-9-21.2-14.1-33.9-14.1H416V48c0-26.5-21.5-48-48-48H112C85.5 0 64 21.5 64 48v48H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h272c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H40c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H64v128c0 53 43 96 96 96s96-43 96-96h128c0 53 43 96 96 96s96-43 96-96h48c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zM160 464c-26.5 0-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48zm320 0c-26.5 0-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48zm80-208H416V144h44.1l99.9 99.9V256z" /></svg>
-          </div>
-          <div class="stat-value text-primary">
-            Free shipping
-          </div>
-          <div class="stat-desc">
-            On order over 4,200 THB
-          </div>
-        </div>
-
-        <div class="stat place-items-center">
-          <div class="stat-figure text-secondary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              aria-hidden="true"
-              role="img"
-              class="iconify iconify--icomoon-free"
-              width="32"
-              height="32"
-              preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 16 16"
-            ><path fill="currentColor" d="M15.25 0h-6c-.412 0-.989.239-1.28.53L.531 7.969a.752.752 0 0 0 0 1.061l6.439 6.439a.752.752 0 0 0 1.061 0L15.47 8.03c.292-.292.53-.868.53-1.28v-6a.753.753 0 0 0-.75-.75zM11.5 6a1.5 1.5 0 1 1 .001-3.001A1.5 1.5 0 0 1 11.5 6z" /></svg>
-          </div>
-          <!-- <div class="stat-title">
-                Page Views
-              </div> -->
-          <div class="stat-value text-secondary">
-            Friendly Price
-          </div>
-          <div class="stat-desc">
-            100% happy in every items
-          </div>
-        </div>
-
-        <div class="stat place-items-center">
-          <div class="stat-figure text-accent">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              aria-hidden="true"
-              role="img"
-              class="iconify iconify--ri"
-              width="32"
-              height="32"
-              preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 24 24"
-            ><path fill="currentColor" d="M19.938 8H21a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1.062A8.001 8.001 0 0 1 12 23v-2a6 6 0 0 0 6-6V9A6 6 0 1 0 6 9v7H3a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h1.062a8.001 8.001 0 0 1 15.876 0zM3 10v4h1v-4H3zm17 0v4h1v-4h-1zM7.76 15.785l1.06-1.696A5.972 5.972 0 0 0 12 15a5.972 5.972 0 0 0 3.18-.911l1.06 1.696A7.963 7.963 0 0 1 12 17a7.963 7.963 0 0 1-4.24-1.215z" /></svg>
-          </div>
-          <!-- <div class="stat-title">
-                Page Views
-              </div> -->
-          <div class="stat-value text-accent">
-            Expert advice
-          </div>
-          <div class="stat-desc">
-            Friendly Service
-          </div>
-        </div>
-      </div>
+    <div class="back-to-top">
+      <a href="#nav"> <img title="Back to Top." src="https://res.cloudinary.com/de8cuyd0n/image/upload/v1520412541/E-commerce%20landing%20page/icons/back_-_top_1x.png" alt="back to top"></a>
     </div>
-    <!--  SECTION-CONTENT  //END -->
-    <!-- <div class="flex flex-col justify-between mx-6 mt-6 mb-6 md:flex-row">
-      <Carousel height-class="h-full" />
-      <Carousel height-class="h-full" class="my-4 md:mt-0 md:mb-0 md:ml-6" />
-    </div> -->
   </div>
 </template>
 
@@ -217,6 +192,7 @@ export default {
   async asyncData ({ $axios }) {
     let cat = []
     let slide = []
+    let article = []
     try {
       const qs = require('qs')
       const query = qs.stringify(
@@ -231,37 +207,49 @@ export default {
           encodeValuesOnly: true
         }
       )
+      const queryArticle = qs.stringify(
+        {
+          populate: {
+            image: {
+              fields: ['url']
+            }
+          }
+        },
+        {
+          encodeValuesOnly: true
+        }
+      )
       cat = await $axios.$get('/allcategories')
+      article = await $axios.$get(`/articles/?${queryArticle}`)
       slide = await $axios.$get(`/slideshows/?${query}`)
+      // console.log(article)
       // or can use https://strapi-gypsy-store.herokuapp.com/api/slideshows?populate[img][fields][0]=url
     } catch (error) {
       console.log(error)
     }
-    return { allcategory: cat, slide }
+    return { allcategory: cat, slide, article }
   },
   data () {
     return {
-      options: {
-        // heightRatio: 0.5,
-        // trimSpace: 'move',
-        // focus: 'center',
-        rewind: true,
-        perPage: 1,
-        direction: 'ttb',
-        wheel: true,
-        releaseWheel: true,
+      mainOptions: {
         arrows: false,
-        type: 'loop', // breakpoints: {
-        //   640: {
-        //     perPage: 1
-        //   }
-        // },
-        // padding: { bottom: 20 },
-        height: '70%',
-        // width: '50%',
-        fixedWidth: '100%'
-        // fixedHeight: '100%'
-        // autoWidth: true
+        type: 'loop',
+        perPage: 2,
+        perMove: 1,
+        gap: '1rem',
+        pagination: false
+      },
+      thumbsOptions: {
+        type: 'slide',
+        rewind: true,
+        gap: '1rem',
+        pagination: false,
+        fixedWidth: 110,
+        fixedHeight: 70,
+        cover: true,
+        focus: 'center',
+        isNavigation: true,
+        updateOnMove: true
       }
     }
   },
@@ -273,6 +261,21 @@ export default {
       return this.allcategory.find(x => x.id === 3)
     }
   },
+  mounted () {
+    setTimeout(() => {
+      const main = this.$refs.main
+      const thumbs = this.$refs.thumbs
+      const thumbsSplide = thumbs?.splide
+      // const blog = this.$refs.editor
+      // console.log(blog)
+      // if (blog) {
+      //   blog[0].childNodes[0].classList.add('truncate')
+      // }
+      if (thumbsSplide) {
+        main?.sync(thumbsSplide)
+      }
+    }, 0)
+  },
   methods: {
     onArrowsMounted (splide, prev, next) {
     },
@@ -282,6 +285,11 @@ export default {
 }
 </script>
 <style scoped>
+#editor {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.75;
+}
 .splide {
   padding: 0 !important;
 }
@@ -345,5 +353,753 @@ h1.left-line:after, h2.h1-replace.left-line:after {
     background: url('~@/static/images/cap-click-left.svg') 50% no-repeat;
     top: 12px;
     left: -105px;
+}
+
+#slide {
+	width: 100%;
+	margin: 3rem 0rem;
+	padding: 1.4rem 0rem;
+}
+
+#slide .container {
+	margin: 0 auto;
+	width: 80%;
+}
+
+#summer-collection {
+	width: 100%;
+	display: block;
+	margin: 6rem 0rem;
+}
+
+#summer-collection .container {
+	margin: 0 auto;
+	width: 80%;
+	background-color: #ffffff;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+#summer-collection .container .sc-content {
+	width: 60%;
+	padding-top: 3.4rem;
+	padding-right: 3rem;
+	padding-bottom: 2rem;
+}
+
+#summer-collection .container .sc-content h1 {
+	font-family: "Franklin Gothic Medium";
+	@apply text-primary;
+	font-size: 4rem;
+	font-weight: 800;
+	letter-spacing: 1rem;
+	line-height: 6rem;
+	text-transform: uppercase;
+	margin-bottom: 2vw;
+}
+
+#summer-collection .container .sc-content p.description {
+	font-family: Cambria;
+	color: rgba(89, 89, 89, 0.8);
+	font-size: 1rem;
+	font-style: italic;
+	line-height: 2rem;
+	margin-bottom: 4vw;
+	padding-right: 4rem;
+}
+
+#summer-collection .container .sc-content a {
+	border-bottom: 2px solid;
+  @apply border-primary;
+	text-decoration: none;
+	font-family: "Franklin Gothic Medium";
+	color: #000000;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+
+#summer-collection .container .sc-media {
+	width: 40vw;
+}
+
+#summer-collection .container .sc-media .sc-media-bg {
+	width: 100%;
+	height: auto;
+	padding-top: 3vw;
+}
+
+#summer-collection .container .sc-media .sc-media-bg img {
+	width: 100%;
+	height: auto;
+}
+
+@media only screen and (max-width: 1024px) {
+	#summer-collection {
+		width: 100vw;
+		display: block;
+		margin-top: 0rem;
+	}
+	#summer-collection .container {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+		flex-direction: column;
+	}
+	#summer-collection .container .sc-content {
+		width: 80vw;
+		padding: 0rem 2rem 2rem;
+	}
+	#summer-collection .container .sc-media {
+		width: 80vw;
+	}
+	#summer-collection .container .sc-content h1 {
+		font-size: 5.6vw;
+		letter-spacing: 1rem;
+		line-height: 4rem;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	#summer-collection .container .sc-content h1 {
+		font-size: 5.6vw;
+		letter-spacing: 0.6rem;
+		line-height: 2.4rem;
+		margin-bottom: 1rem;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	#summer-collection .container .sc-content p.description {
+		font-size: 1rem;
+		line-height: 1.8rem;
+		margin-bottom: 4vw;
+		padding-right: 1.2rem;
+		text-align: justify;
+		margin-bottom: 2rem;
+	}
+}
+#category {
+  width: 100%;
+}
+
+#category .container {
+	display: block;
+	width: 80%;
+	margin: 0 auto;
+	font-size: 0;
+}
+
+#newproducts {
+	width: 100%;
+  display: block;
+	margin: 2rem 0rem;
+	/*  background-color:  #f5f2f1;*/
+	/* padding: 1.4rem 0rem; */
+}
+
+#newproducts .container {
+	display: block;
+	width: 80%;
+	margin: 0 auto;
+	font-size: 0;
+}
+
+#newproducts .container .products-header {
+	font-size: 16px;
+	text-align: center;
+	margin-bottom: 3rem;
+}
+
+#newproducts .container .products-header h2 {
+	/* padding: 2rem 1rem; */
+	text-transform: uppercase;
+	font-family: "Franklin Gothic Medium";
+}
+
+#newproducts .container .products-header p {
+	font-family: Cambria;
+	color: rgba(89, 89, 89, 1);
+	font-size: 1rem;
+	font-style: italic;
+	line-height: 1.5;
+	text-align: center;
+}
+
+#newproducts .container .product {
+	width: 25%;
+	display: inline-block;
+	font-size: 16px;
+	text-align: center;
+	padding: 1.8rem;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	opacity: 1;
+}
+
+#newproducts .container .product:hover {
+	-webkit-transform: scale(0.9);
+	transform: scale(0.9);
+	opacity: 0.8;
+	-webkit-transition: opacity 800ms ease-in-out 0s;
+	transition: opacity 800ms ease-in-out 0s;
+	-webkit-transition: -webkit-transform 1s ease-in-out 0s;
+	transition: -webkit-transform 1s ease-in-out 0s;
+	transition: transform 1s ease-in-out 0s;
+	transition: transform 1s ease-in-out 0s, -webkit-transform 1s ease-in-out 0s;
+	cursor: pointer;
+}
+
+#newproducts .container .product figure img {
+	width: 100%;
+	height: auto;
+}
+
+#newproducts .container .product figure figcaption {
+	font-family: "Franklin Gothic Medium";
+	color: rgba(89, 89, 89, 1);
+	font-size: 0.8rem;
+	font-weight: 600;
+	letter-spacing: 0.02rem;
+	text-align: center;
+	padding: 1rem 0rem 0rem;
+	text-transform: uppercase;
+}
+
+@media only screen and (max-width: 1024px) {
+	#newproducts .container .product {
+		width: 50%;
+		padding: 3rem;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	#newproducts .container .product {
+		width: 50%;
+		padding: 2rem;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	#newproducts .container .product {
+		width: 100%;
+	}
+}
+
+#hotproducts {
+	width: 100%;
+  display: block;
+	margin: 2rem 0rem;
+	/*  background-color:  #f5f2f1;*/
+	/* padding: 1.4rem 0rem; */
+}
+
+#hotproducts .container {
+	display: block;
+	width: 80%;
+	margin: 0 auto;
+	font-size: 0;
+}
+
+#hotproducts .container .products-header {
+	font-size: 16px;
+	text-align: center;
+	margin-bottom: 3rem;
+}
+
+#hotproducts .container .products-header h2 {
+	/* padding: 2rem 1rem; */
+	text-transform: uppercase;
+	font-family: "Franklin Gothic Medium";
+}
+
+#hotproducts .container .products-header p {
+	font-family: Cambria;
+	color: rgba(89, 89, 89, 1);
+	font-size: 1rem;
+	font-style: italic;
+	line-height: 1.5;
+	text-align: center;
+}
+
+#hotproducts .container .product {
+	width: 25%;
+	display: inline-block;
+	font-size: 16px;
+	text-align: center;
+	padding: 1.8rem;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	opacity: 1;
+}
+
+#hotproducts .container .product:hover {
+	-webkit-transform: scale(0.9);
+	transform: scale(0.9);
+	opacity: 0.8;
+	-webkit-transition: opacity 800ms ease-in-out 0s;
+	transition: opacity 800ms ease-in-out 0s;
+	-webkit-transition: -webkit-transform 1s ease-in-out 0s;
+	transition: -webkit-transform 1s ease-in-out 0s;
+	transition: transform 1s ease-in-out 0s;
+	transition: transform 1s ease-in-out 0s, -webkit-transform 1s ease-in-out 0s;
+	cursor: pointer;
+}
+
+#hotproducts .container .product figure img {
+	width: 100%;
+	height: auto;
+}
+
+#hotproducts .container .product figure figcaption {
+	font-family: "Franklin Gothic Medium";
+	color: rgba(89, 89, 89, 1);
+	font-size: 0.8rem;
+	font-weight: 600;
+	letter-spacing: 0.02rem;
+	text-align: center;
+	padding: 1rem 0rem 0rem;
+	text-transform: uppercase;
+}
+
+@media only screen and (max-width: 1024px) {
+	#hotproducts .container .product {
+		width: 50%;
+		padding: 3rem;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	#hotproducts .container .product {
+		width: 50%;
+		padding: 2rem;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	#hotproducts .container .product {
+		width: 100%;
+	}
+}
+
+#collections {
+	width: 100%;
+	display: block;
+	margin: 3rem 0rem;
+	/*  background-color:  #f5f2f1;*/
+	padding: 1.4rem 0rem;
+}
+
+#collections .container {
+	margin: 0 auto;
+	width: 80%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+#collections .container .c-1 {
+	-webkit-box-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	padding: 3rem 0rem 0rem 1rem;
+	/*  background-color:  #f5f2f1;*/
+}
+
+#collections .container .c-1 .c-1-image-holder {
+	width: 100%;
+	height: auto;
+}
+
+#collections .container .c-1 .c-1-image-holder img {
+	width: 100%;
+	height: auto;
+}
+
+#collections .container .c-2 .c-2-image-holder {
+	width: 45%;
+	height: auto;
+	margin: 3rem auto;
+}
+
+#collections .container .c-2 .c-2-image-holder img {
+	width: 100%;
+	height: auto;
+}
+
+#collections .container .c-2 {
+	-webkit-box-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	padding: 1rem;
+	/*  background-color:  #f5f2f1;*/
+}
+
+#collections .container .c-2 h2 {
+  @apply text-primary;
+	padding: 1rem 0rem;
+	text-align: right;
+	font-family: "Franklin Gothic Medium";
+	font-size: 1.8rem;
+	letter-spacing: 0.094rem;
+	text-transform: uppercase;
+}
+
+#collections .container .c-2 hr {
+	width: 30%;
+	margin-left: 70%;
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 0.1rem solid;
+  @apply border-primary;
+	padding: 0;
+	margin-bottom: 4rem;
+}
+
+#collections .container .c-2 p.button {
+	@apply bg-primary;
+	-webkit-box-shadow: 0px 1px 3.92px 0.08px rgba(204, 204, 153, 0.35);
+	box-shadow: 0px 1px 3.92px 0.08px rgba(204, 204, 153, 0.35);
+	width: 45%;
+	text-align: center;
+	padding: 0.8rem 0.2rem;
+	color: #ffffff;
+	text-transform: uppercase;
+	font-size: 0.7rem;
+	margin: 0 auto;
+	margin-right: -1%;
+	font-weight: 600;
+	letter-spacing: 0.1rem;
+}
+
+#collections .container .c-2 p.button:hover {
+	cursor: pointer;
+	background-color: #ffffff;
+	@apply text-primary;
+	-webkit-transition: background-color 1s ease-in-out 0s;
+	-o-transition: background-color 1s ease-in-out 0s;
+	transition: background-color 1s ease-in-out 0s;
+	-webkit-transition: color 400ms ease-in-out 0s;
+	-o-transition: color 400ms ease-in-out 0s;
+	transition: color 400ms ease-in-out 0s;
+}
+
+#collections .container .c-2 .left {
+	position: relative;
+	right: -6rem;
+	-webkit-box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+	box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+#collections .container .c-2 .right {
+	position: relative;
+	top: -2rem;
+	right: 2rem;
+	-webkit-box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+	box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 1024px) {
+	#collections .container {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: column;
+		flex-direction: column;
+	}
+	#collections .container .c-1 {
+		-webkit-box-flex: 1;
+		-ms-flex: 1;
+		flex: 1;
+		padding: 4rem 0rem 0rem 0rem;
+	}
+	#collections .container .c-2 .c-2-image-holder {
+		width: 50%;
+		height: auto;
+		margin: 3rem auto;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	#collections .container .c-2 .c-2-image-holder {
+		width: 70%;
+		height: auto;
+		margin: 3rem auto;
+	}
+	#collections .container .c-2 .left {
+		position: relative;
+		right: 0rem;
+		margin-bottom: 2rem;
+	}
+	#collections .container .c-2 .right {
+		position: relative;
+		top: 0rem;
+		right: 0rem;
+	}
+	#collections .container .c-2 p.button {
+		width: 60%;
+		padding: 0.8rem 2rem;
+	}
+}
+
+#blog {
+	width: 100%;
+	display: block;
+	/* margin: 3rem 0rem 0rem; */
+	/* background-color: #f2f2f2; */
+	padding: 0rem 0rem 3rem;
+}
+
+#blog .container {
+	margin: 0 auto;
+	width: 80%;
+	/* background-color: #f2f2f2; */
+}
+
+#blog .container .blog-header {
+	text-align: center;
+	margin-bottom: 3rem;
+}
+
+#blog .container .blog-header h2 {
+	/* padding: 2rem 1rem; */
+	text-transform: uppercase;
+	font-family: "Franklin Gothic Medium";
+	/* color: #000000;
+	font-size: 1.875rem;
+	font-weight: 400;
+	letter-spacing: 0.2rem;
+	line-height: 1;
+	text-align: center; */
+}
+
+#blog .container .blog-header p {
+	font-family: Cambria;
+	color: rgba(89, 89, 89, 1);
+	font-size: 1rem;
+	font-style: italic;
+	line-height: 1.5;
+	text-align: center;
+}
+
+.blog-card {
+  transition: height 0.3s ease;
+  -webkit-transition: height 0.3s ease;
+  background: #F8F8F8;
+  border-radius: 3px;
+  box-shadow: 0 3px 7px -3px rgba(0, 0, 0, 0.3);
+  margin: 0 auto 1.6%;
+  overflow: hidden;
+  position: relative;
+  font-size: 14px;
+}
+.blog-card:hover .details {
+  left: 0;
+}
+.blog-card:hover.alt .details {
+  right: 0;
+}
+.blog-card.alt .details {
+  right: -100%;
+  left: inherit;
+}
+.blog-card .photo {
+  height: 200px;
+  position: relative;
+}
+/* .blog-card .photo.photo1 {
+  background: url("https://www.permaculturereflections.com/wp-content/uploads/2015/07/startsprout.jpg") center no-repeat;
+  background-size: cover;
+}
+.blog-card .photo.photo2 {
+  background: url("https://www.permaculturereflections.com/wp-content/uploads/2015/07/designfundamentals1.jpg") center no-repeat;
+  background-size: cover;
+} */
+.blog-card .details {
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+  color: #fff;
+  font-family: "Roboto";
+  list-style: none;
+  margin: 0;
+  padding: 10px 15px;
+  height: 200px;
+  /*POSITION*/
+  position: absolute;
+  top: 0;
+  left: -100%;
+}
+.blog-card .details > li {
+  padding: 3px 0;
+}
+.blog-card .details li:before, .blog-card .details .prtags ul:before {
+  font-family: FontAwesome;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.blog-card .details .prauthor:before {
+  content: "\f007";
+}
+.blog-card .details .date:before {
+  content: "\f133";
+}
+.blog-card .details .prtags ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.blog-card .details .prtags ul:before {
+  content: "\f02b";
+}
+.blog-card .details .prtags li {
+  display: inline-block;
+  margin-right: 3px;
+}
+.blog-card .details a {
+  color: inherit;
+  border-bottom: 1px dotted;
+}
+.blog-card .details a:hover {
+  color: #ffa100;
+}
+.blog-card .description {
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative;
+  height:200px;
+}
+.blog-card .description h2 {
+  font-family: "Roboto";
+  line-height: 1em;
+  font-weight: 800;
+  margin: 0 0 10px 0;
+}
+.blog-card .description h3 {
+  color: #9b9b9b;
+  line-height: 1.2em;
+  text-transform: uppercase;
+  font-size: 1em;
+  font-weight: 400;
+  margin: 1.2% 0;
+}
+.blog-card .description p {
+  position: relative;
+  margin: 0;
+  padding-top: 20px;
+}
+.blog-card .description p:after {
+  content: "";
+  background: #00c04e;
+  height: 6px;
+  width: 40px;
+  /*POSITION*/
+  position: absolute;
+  top: 6px;
+  left: 0;
+}
+.blog-card .description a {
+  @apply text-primary;
+  margin-bottom: 10px;
+  float: right;
+}
+.blog-card .description a:after {
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  content: "\f061";
+  font-family: FontAwesome;
+  margin-left: -10px;
+  opacity: 0;
+  vertical-align: middle;
+}
+.blog-card .description a:hover:after {
+  margin-left: 5px;
+  opacity: 1;
+}
+
+@media screen and (min-width: 600px) {
+  .blog-card {
+    height: 150px;
+    max-width: 600px;
+  }
+  .blog-card:hover .photo {
+    -webkit-transform: rotate(5deg) scale(1.3);
+        -ms-transform: rotate(5deg) scale(1.3);
+            transform: rotate(5deg) scale(1.3);
+  }
+  .blog-card:hover.alt .photo {
+    -webkit-transform: rotate(-5deg) scale(1.3);
+        -ms-transform: rotate(-5deg) scale(1.3);
+            transform: rotate(-5deg) scale(1.3);
+  }
+  .blog-card.alt .details {
+    padding-left: 30px;
+  }
+  .blog-card.alt .description {
+    float: right;
+  }
+  .blog-card.alt .description:before {
+    -webkit-transform: skewX(5deg);
+        -ms-transform: skewX(5deg);
+            transform: skewX(5deg);
+    right: -15px;
+    left: inherit;
+  }
+  .blog-card.alt .photo {
+    float: right;
+  }
+  .blog-card .photo {
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    float: left;
+    height: 100%;
+    width: 40%;
+  }
+  .blog-card .details {
+    width: 40%;
+  }
+  .blog-card .description {
+    float: left;
+    width: 60%;
+    z-index: 0;
+  }
+  .blog-card .description:before {
+    -webkit-transform: skewX(-5deg);
+        -ms-transform: skewX(-5deg);
+            transform: skewX(-5deg);
+    content: "";
+    background: #F8F8F8;
+    width: 100%;
+    z-index: -1;
+    /*POSITION*/
+    position: absolute;
+    left: -15px;
+    top: 0;
+    bottom: 0;
+  }
+}
+
+.back-to-top {
+	padding: 1rem;
+	position: fixed;
+	bottom: 8%;
+	right: 2%;
+	z-index: 2;
+	opacity: 0.2;
+	background-color: rgba(255, 255, 255, 0);
+}
+
+.back-to-top:hover {
+	-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+	background-color: rgba(255, 255, 255, 0.4);
+	opacity: 1;
 }
 </style>

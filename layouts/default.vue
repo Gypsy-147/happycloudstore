@@ -1,8 +1,11 @@
 <template>
-  <div class="flex flex-col h-screen justify-between relative">
+  <div class="flex flex-col h-screen justify-between relative bg-white">
     <!--  COMPONENT: HEADER -->
-    <header class="fixed top-0 left-0 right-0 z-50">
-      <div class="navbar bg-base-200">
+    <!-- <li><a href="#collections">collections</a></li>
+          <li><a href="#blog">blog</a></li> -->
+    <header>
+      <!-- <header class="fixed top-0 left-0 right-0 z-50"> -->
+      <div id="nav" class="navbar bg-base-200">
         <div class="navbar-start">
           <a href="/"> <img src="/happycloudlogo.png" class="h-16" alt="logo"> </a>
         </div>
@@ -85,7 +88,7 @@
         </div>
       </div>
     </header>
-    <div class="mt-20">
+    <div class="bg-white">
       <Nuxt />
     </div>
     <footer class="bg-base-200">
@@ -165,11 +168,11 @@
                 <span class="sr-only">YouTube</span>
                 <i class="w-4 fab fa-youtube" />
               </a>
-              <a href="https://www.facebook.com/happycloudthailand" target="_blank" class="btn glass bg-primary btn-circle">
+              <a href="https://www.facebook.com/happycloudstoreth" target="_blank" class="btn glass bg-primary btn-circle">
                 <span class="sr-only">Facebook</span>
                 <i class="fab fa-facebook-square" />
               </a>
-              <a href="https://www.instagram.com/happycloudthailand" target="_blank" class="btn glass bg-primary btn-circle">
+              <a href="https://www.instagram.com/happycloudstoreth" target="_blank" class="btn glass bg-primary btn-circle">
                 <span class="sr-only">Instagram</span>
                 <i class="fab fa-instagram" />
               </a>
@@ -244,7 +247,7 @@ export default {
 .post-container {
 position: relative;
 padding-bottom: 56.25%;
-/* padding-top: 35px; */
+padding-top: 35px;
 height: 0;
 overflow: hidden;
 }

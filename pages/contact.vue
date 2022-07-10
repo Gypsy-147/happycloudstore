@@ -17,8 +17,8 @@
         <i class="fa fa-globe" /> www.happycloudth.com
       </div>
       <center>
-        <button class="fa-brands fa-facebook-square" @click="openLink('https://www.facebook.com/happycloudthailand')" />
-        <button class="fa-brands fa-instagram" @click="openLink('https://www.instagram.com/happycloudthailand')" />
+        <button class="fa-brands fa-facebook-square" @click="openLink('https://www.facebook.com/happycloudstoreth')" />
+        <button class="fa-brands fa-instagram" @click="openLink('https://www.instagram.com/happycloudstoreth')" />
       </center>
     </div>
   </div>

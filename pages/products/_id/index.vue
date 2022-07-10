@@ -66,7 +66,7 @@ export default {
       productData = await $axios.$get(`/products/${paramID}?populate[image][fields][0]=url&populate[categories]=%2A&populate[custom_field]=%2A`)
       // https://strapi-gypsy-store.herokuapp.com/api/products/2?populate[image][fields][0]=url&populate[categories]=%2A&populate[custom_field]=%2A
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
     return { productData }
   },
@@ -88,7 +88,7 @@ export default {
   },
   methods: {
     goContact () {
-      window.open('https://www.facebook.com/happycloudthailand', '_blank').focus()
+      window.open('https://www.facebook.com/happycloudstoreth', '_blank').focus()
     }
   }
 }
